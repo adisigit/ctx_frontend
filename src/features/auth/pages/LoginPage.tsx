@@ -1,8 +1,13 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { authService } from "../services/AuthServices";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "react-router-dom";
 
 export default function LoginPage() {
+  const [searchParams] = useSearchParams();
+  const client = (searchParams.get("client") as "web" | "cli") || "web";
+  const sessionId = searchParams.get("session_id");
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm min-h-60">
@@ -11,7 +16,7 @@ export default function LoginPage() {
 
         <Button
           className="w-full mb-4 h-10"
-          onClick={() => authService.loginWithProvider("google")}
+          onClick={() => authService.loginWithProvider("google", {client, sessionId})}
         >
           <FaGoogle className="mr-2 h-4 w-4" />
           Continue with Google
@@ -20,7 +25,7 @@ export default function LoginPage() {
         <Button
           variant="outline"
           className="w-full h-10"
-          onClick={() => authService.loginWithProvider("github")}
+          onClick={() => authService.loginWithProvider("github", {client, sessionId})}
         >
           <FaGithub className="mr-2 h-4 w-4" />
           Continue with GitHub
