@@ -7,14 +7,22 @@ export interface User {
   Avatar: string;
 }
 
+interface LoginOptions {
+  client?: "web" | "cli";
+  sessionId?: string | null;
+}
+
 export const authService = {
-  loginWithProvider: (provider: string) => {
-    window.location.href = `${API_BASE}/auth/${provider}`
+  loginWithProvider: (provider: string, { client = "web", sessionId }: LoginOptions = {}) => {
+    const params = new URLSearchParams({ client })
+    if (sessionId) params.set("session_id", sessionId)
+    window.location.href = `${API_BASE}/auth/${provider}?${params.toString()}`
   },
 
   logOut: async () => {
-    await fetch(`${API_BASE}/auth/logout`, {
+    await fetch(`${API_BASE}/logout`, {
       method: 'POST',
+      credentials: 'include',
     })
 
   }
