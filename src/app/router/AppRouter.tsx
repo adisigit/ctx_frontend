@@ -13,7 +13,7 @@ export default function AppRouter() {
         <Route path="/login/complete" element={<LoginCompletePage />} />
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/team/:teamId" element={<TeamPage />} />
+          <Route path="/team/:id" element={<TeamPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace/>} />
       </Routes>
