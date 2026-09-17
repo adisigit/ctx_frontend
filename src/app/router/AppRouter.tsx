@@ -4,6 +4,7 @@ import LoginPage from "../../features/auth/pages/LoginPage";
 import { AppLayout } from "@/shared/components/AppLayout";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import TeamPage from "@/features/team/pages/TeamPage";
+import MyActivityPage from "@/features/activity/pages/MyActivityPage";
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/team/:id" element={<TeamPage />} />
+          <Route path="/myactivity" element={<MyActivityPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace/>} />
       </Routes>
