@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import { ChevronDown, LayoutDashboard, LogOut, Users } from "lucide-react"
+import { Activity, ChevronDown, LayoutDashboard, LogOut, Users } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { authService } from "@/features/auth/services/AuthServices"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, } from "@/components/ui/collapsible"
@@ -95,6 +95,10 @@ export function Sidebar({ onNavigate }: SidebarProps) {
             ))}
           </CollapsibleContent>
         </Collapsible>
+        <NavLink to="/myactivity" className={navLinkClass} onClick={onNavigate}>
+          <Activity className="size-4" />
+          My Activity
+        </NavLink>
       </nav>
 
       <div className="border-t border-border p-3">
