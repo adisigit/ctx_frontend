@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { CheckCircle2, Terminal, XCircle } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,16 @@ export default function LoginCompletePage() {
   const isSuccess = status === "success";
   const isCli = client === "cli";
 
+  useEffect(() => {
+    if (isSuccess && !isCli) {
+      const timeout = setTimeout(() => {
+        navigate("/dashboard", { replace: true });
+      }, 800);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isSuccess, isCli, navigate]);
+
   const title = isSuccess
     ? isCli
       ? "CLI login successful"
@@ -31,7 +42,7 @@ export default function LoginCompletePage() {
   const description = isSuccess
     ? isCli
       ? "Authentication complete. You can close this window and return to your terminal."
-      : "You have been signed in successfully."
+      : "You have been signed in successfully. Redirecting to your dashboard..."
     : message ?? "Something went wrong during sign in. Please try again.";
 
   return (
@@ -56,6 +67,16 @@ export default function LoginCompletePage() {
             onClick={() => navigate(buildLoginUrl(client, sessionId))}
           >
             Try again
+          </Button>
+        )}
+
+        {isSuccess && !isCli && (
+          <Button
+            className="w-full h-10"
+            variant="outline"
+            onClick={() => navigate("/dashboard", { replace: true })}
+          >
+            Go to dashboard now
           </Button>
         )}
 
