@@ -5,6 +5,7 @@ import { AppLayout } from "@/shared/components/AppLayout";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import TeamPage from "@/features/team/pages/TeamPage";
 import MyActivityPage from "@/features/activity/pages/MyActivityPage";
+import AccountPage from "@/features/account/pages/AccountPage";
 
 export default function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export default function AppRouter() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/team/:id" element={<TeamPage />} />
           <Route path="/myactivity" element={<MyActivityPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace/>} />
       </Routes>
